@@ -1,21 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title># Домашнее задание по занятию "WebWorkers, ServiceWorkers"</title>
 </head>
-
 <body>
     <div class="container">
         <h1>
-            <a href="https://github.com/netology-code/ahj-homeworks/tree/AHJ-50/media/">
+            <a href="https://github.com/netology-code/ahj-homeworks/tree/AHJ-50/workers/">
                 # Домашнее задание по занятию "WebWorkers, ServiceWorkers"
             </a>
         </h1>
-        
+        <div class="container-news">
+            <div class="news-header">
+                <h2 class="news-title">Новости мира кино</h2>
+                <button id="refresh">Обновить</button>
+            </div>
+            <div id="news-list" class="news-list">
+                <div class="news-item placeholder">
+                    <div class="news-item__title placeholder"></div>
+                    <div class="news-item__content">
+                        <div class="news-item__image placeholder"></div>
+                        <div class="news-item__text placeholder">
+                            <p class="news-item__paragraph placeholder">Строка один</p>
+                            <p class="news-item__paragraph placeholder">Строка два</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="error" class="error hidden">
+                <p>Не удалось загрузить новости. Проверьте подключение к интернету и обновите страницу</p>
+            </div>
+        </div>
     </div>
 </body>
-
 </html>

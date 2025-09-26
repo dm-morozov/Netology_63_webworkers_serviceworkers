@@ -38,6 +38,165 @@ h2 {
   padding: 30px 20px;
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   box-sizing: border-box;
+}
+
+/* Контейнер новостей */
+.container-news {
+  padding-top: 20px;
+}
+
+/* Стили для списка новостей */
+.news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.news-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.news-title {
+    margin: 0;
+    padding: 10px 20px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #0079bf;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.news-title:hover {
+  color: #0056b3;
+}
+
+/* Элемент новости */
+.news-item {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  background: #f0f0f0;
+  border-radius: 8px;
+}
+
+/* Заголовок новости */
+.news-item__title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Содержимое новости (изображение и текст) */
+.news-item__content {
+  display: flex;
+  gap: 15px;
+  flex: 1;
+}
+
+/* Область под изображение */
+.news-item__image {
+  width: 100px;
+  height: 100px;
+  background: #ddd; /* Серый цвет для плейсхолдера */
+  border-radius: 4px;
+}
+
+/* Текст новости */
+.news-item__text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.news-item__paragraph {
+  margin: 5px 0;
+  line-height: 1.5;
+  color: #666; /* Серый текст как на макете */
+}
+
+/* Плейсхолдеры для загрузки */
+.placeholder {
+  background: transparent; /* Убираем фон, чтобы использовать родительский */
+}
+
+.news-item__title.placeholder {
+  width: 60%;
+  height: 40px;
+  border-radius: 4px;
+  background: #e0e0e0;
+  padding: 8px 15px;
+  box-sizing: border-box;
+}
+
+.news-item__image.placeholder {
+  background: #e0e0e0; /* Серый фон для изображения */
+}
+
+.news-item__text.placeholder {
+  width: 100%;
+}
+
+.news-item__paragraph.placeholder {
+  height: 40px;
+  border-radius: 4px;
+  background: #e0e0e0;
+  padding: 8px 15px;
+  box-sizing: border-box;
+}
+
+/* Стили для ошибки */
+.error {
+  text-align: center;
+  color: #d9534f;
+  padding: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Кнопка */
+#refresh {
+  display: block;
+  margin-right: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff; /* Яркий синий как на макете */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#refresh:hover {
+  background-color: #0056b3;
+}
+
+/* Эффект сияния для плейсхолдера */
+.placeholder {
+  position: relative;
+  overflow: hidden;
+}
+
+.placeholder::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -200px;
+  width: 200px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(450%);
+  }
 }
