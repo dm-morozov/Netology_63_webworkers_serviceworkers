@@ -1,3 +1,5 @@
+/* src/css/styles.css */
+
 /* Общие стили для страницы */
 body {
   margin: 0;
@@ -58,16 +60,17 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .news-title {
-    margin: 0;
-    padding: 10px 20px;
-    font-size: 24px;
-    font-weight: 600;
-    color: #0079bf;
-    text-decoration: none;
-    transition: color 0.3s ease;
+  margin: 0;
+  padding: 10px 20px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #0079bf;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 .news-title:hover {
@@ -101,8 +104,10 @@ h2 {
 .news-item__image {
   width: 100px;
   height: 100px;
-  background: #ddd; /* Серый цвет для плейсхолдера */
+  background: #ddd;
   border-radius: 4px;
+  background-size: cover;
+  background-position: center;
 }
 
 /* Текст новости */
@@ -114,42 +119,113 @@ h2 {
 }
 
 .news-item__paragraph {
-  margin: 5px 0;
+  margin: 0;
   line-height: 1.5;
-  color: #666; /* Серый текст как на макете */
+  color: #666;
 }
 
-/* Плейсхолдеры для загрузки */
-.placeholder {
-  background: transparent; /* Убираем фон, чтобы использовать родительский */
+/* Дата новости */
+.news-item__date {
+    font-size: 14px;
+    border-radius: 4px;
+    color: #999;
+    margin-top: 0px;
 }
 
+/* --- Плейсхолдеры для загрузки (Shimmer Effect) --- */
+
+/* Контейнер, который сам не мерцает */
+.news-item.placeholder {
+    background: #f0f0f0; 
+    pointer-events: none;
+}
+
+/* Убираем глобальную анимацию, чтобы не мерцал фон и тени */
+.placeholder::before {
+    content: none !important; 
+}
+
+/* Общие стили для всех мерцающих блоков */
+.news-item__title.placeholder,
+.news-item__image.placeholder,
+.news-item__paragraph.placeholder,
+.news-item__date.placeholder {
+    background-color: #e0e0e0 !important;
+    position: relative;
+    overflow: hidden; 
+    border: none;
+    color: transparent !important;
+}
+
+/* Размеры плейсхолдеров */
 .news-item__title.placeholder {
   width: 60%;
-  height: 40px;
+  height: 48px; /* увеличено до реальной высоты заголовка */
   border-radius: 4px;
-  background: #e0e0e0;
-  padding: 8px 15px;
-  box-sizing: border-box;
+  padding: 0;
+  margin-bottom: 0px;
 }
 
 .news-item__image.placeholder {
-  background: #e0e0e0; /* Серый фон для изображения */
+  width: 100px;
+  height: 100px; 
+  border-radius: 4px;
 }
 
 .news-item__text.placeholder {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .news-item__paragraph.placeholder {
-  height: 40px;
+  height: 60px; 
+  width: 95%; 
   border-radius: 4px;
-  background: #e0e0e0;
-  padding: 8px 15px;
-  box-sizing: border-box;
+  padding: 0;
+  margin: 0px 0;
 }
 
-/* Стили для ошибки */
+.news-item__date.placeholder {
+  display: block;
+  height: 20px;
+  border-radius: 4px;
+  width: 35%;
+  margin-top: 0px;
+}
+
+/* --- САМА АНИМАЦИЯ МЕРЦАНИЯ (Shimmer) --- */
+
+/* Применяем псевдоэлемент с градиентом только к внутренним блокам */
+.news-item__title.placeholder::after,
+.news-item__image.placeholder::after,
+.news-item__paragraph.placeholder::after,
+.news-item__date.placeholder::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.4) 20%,
+        rgba(255, 255, 255, 0.6) 60%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    animation: shimmer 1.5s linear infinite;
+}
+
+@keyframes shimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* --- Стили для ошибки --- */
 .error {
   text-align: center;
   color: #d9534f;
@@ -167,7 +243,7 @@ h2 {
   padding: 10px 20px;
   font-size: 16px;
   color: #fff;
-  background-color: #007bff; /* Яркий синий как на макете */
+  background-color: #007bff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -178,25 +254,7 @@ h2 {
   background-color: #0056b3;
 }
 
-/* Эффект сияния для плейсхолдера */
-.placeholder {
-  position: relative;
-  overflow: hidden;
-}
-
-.placeholder::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -200px;
-  width: 200px;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-  animation: shimmer 3s infinite;
-}
-
-@keyframes shimmer {
-  100% {
-    transform: translateX(450%);
-  }
+#refresh:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
 }
