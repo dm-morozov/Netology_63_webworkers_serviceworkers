@@ -1,34 +1,24 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend server for Netology_63_webworkers_serviceworkers project",
   "license": "ISC",
   "author": "dm-morozov",
   "type": "commonjs",
-  "main": "index.ts",
+  "main": "dist/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node --require tsconfig-paths/register --files server.ts",
+    "start": "node dist/server.js",
     "build": "tsc"
   },
   "dependencies": {
-    "@types/koa": "^3.0.0",
-    "body-parser": "^2.2.0",
-    "cors": "^2.8.5",
-    "express": "^5.1.0",
     "koa": "^3.0.1",
-    "pino": "^9.9.5",
-    "pino-pretty": "^13.1.1",
-    "uuid": "^13.0.0",
-    "ws": "^8.18.3"
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
-    "@types/body-parser": "^1.19.6",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.3",
+    "@types/koa": "^3.0.0",
     "@types/node": "^20.12.12",
-    "@types/pino": "^7.0.4",
-    "@types/ws": "^8.18.1",
+    "@types/uuid": "^9.0.8",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.9.2"
