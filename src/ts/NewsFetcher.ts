@@ -7,7 +7,8 @@ import { ApiResponse } from "./type";
  * Инкапсулирует логику получения данных по сети.
  */
 export default class NewsFetcher {
-  private apiUrl: string = "http://localhost:3030/news";
+  private apiUrl: string =
+    "https://netology-63-webworkers-serviceworkers.onrender.com/news";
 
   constructor(apiURL?: string) {
     if (apiURL) this.apiUrl = apiURL;

@@ -5,12 +5,7 @@ const CACHE_STATIC_V1 = "news-app-static-v1";
 const CACHE_DATA_V1 = "news-app-data-v1";
 
 // Список статических ресурсов (App Shell)
-const STATIC_ASSETS = [
-  "/",
-  "/index.html",
-  "/bundle.js", // Имя выходного файла из Webpack
-  "/style.css", // Имя файла CSS из MiniCssExtractPlugin
-];
+const STATIC_ASSETS = ["/", "/index.html", "/bundle.js", "/style.css"];
 
 // УСТАНОВКА (INSTALL)
 self.addEventListener("install", (event) => {
@@ -60,11 +55,13 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   const requestUrl = new URL(event.request.url);
 
-  // 1. Запросы к API[](http://localhost:3030/news)
-  const isApiRequest =
-    requestUrl.pathname === "/news" &&
-    requestUrl.hostname === "localhost" &&
-    requestUrl.port === "3030";
+  // Пропускаем запрос к самому Service Worker
+  if (requestUrl.pathname.endsWith("/sw.js")) {
+    return; // Запрос идёт в сеть, без перехвата SW
+  }
+
+  // Определяем, является ли запрос запросом к нашему API
+  const isApiRequest = requestUrl.pathname === "/news";
 
   if (isApiRequest) {
     event.respondWith(
@@ -111,7 +108,7 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // 2. Статические ресурсы (Cache First, then Network)
+  // Статические ресурсы (Cache First, then Network)
   const isStaticAsset =
     STATIC_ASSETS.includes(requestUrl.pathname) ||
     event.request.destination === "style" ||
@@ -133,6 +130,6 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // 3. Остальные запросы: Network Only
+  // Остальные запросы: Network Only
   event.respondWith(fetch(event.request));
 });

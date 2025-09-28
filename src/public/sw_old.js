@@ -59,12 +59,13 @@ self.addEventListener("activate", (event) => {
 // ПЕРЕХВАТ ЗАПРОСОВ (FETCH)
 self.addEventListener("fetch", (event) => {
   const requestUrl = new URL(event.request.url);
+  // !!! ИСПРАВЛЕНИЕ: Пропускаем запрос к самому Service Worker
+  if (requestUrl.pathname.endsWith("/sw.js")) {
+    return; // Запрос идет в сеть, без перехвата SW
+  }
 
-  // 1. Запросы к API[](http://localhost:3030/news)
-  const isApiRequest =
-    requestUrl.pathname === "/news" &&
-    requestUrl.hostname === "localhost" &&
-    requestUrl.port === "3030";
+  // Определяем, является ли запрос запросом к нашему API:
+  const isApiRequest = requestUrl.pathname === "/news";
 
   if (isApiRequest) {
     event.respondWith(
