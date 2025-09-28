@@ -18,6 +18,12 @@ export default [
         ...globals.es2023,
         ...globals.jest, // Добавляем Jest-глобали
         ...globals.browser, // Добавляем браузерные глобали (window, document, и т.д.)
+        ...globals.worker, // Добавляем глобали Web/Service Worker (self, FetchEvent, ExtendableEvent и т.д.)
+
+        // !!! ДОПОЛНИТЕЛЬНОЕ ИСПРАВЛЕНИЕ ДЛЯ NO-UNDEF: !!!
+        'ServiceWorkerGlobalScope': 'readonly',
+        'ExtendableEvent': 'readonly',
+        'FetchEvent': 'readonly',
       },
     },
     plugins: {

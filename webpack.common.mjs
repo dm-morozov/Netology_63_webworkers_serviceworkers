@@ -1,17 +1,16 @@
-// webpack.common.mjs       # Общая конфигурация Webpack
+// webpack.common.mjs
 
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import CopyPlugin from "copy-webpack-plugin"; // Убедись, что установлен
 import path from "path";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
-console.log(__filename);
 const __dirname = path.dirname(__filename);
-console.log(__dirname);
 
 export default {
-  entry: "./src/index.ts", // Указали точку входа index.ts
+  entry: "./src/index.ts",
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
@@ -19,27 +18,23 @@ export default {
   },
   module: {
     rules: [
-      // Добавили правило для обработки .ts с помощью ts-loader
       {
         test: /\.ts$/,
-        use: 'ts-loader',
+        use: "ts-loader",
         exclude: /node_modules/,
       },
       {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
-      // заставит Webpack копировать картинки в dist/ 
-      // и возвращать путь к ним.
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource',
-      },      
-    ]
+        type: "asset/resource",
+      },
+    ],
   },
   resolve: {
-    // Webpack теперь понимает .ts
-    extensions: ['.ts', '.js'], // Добавили .ts
+    extensions: [".ts", ".js"],
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -49,5 +44,15 @@ export default {
     new MiniCssExtractPlugin({
       filename: "style.css",
     }),
-  ]
+    new CopyPlugin({
+      patterns: [
+        { from: "src/ts/sw.js", to: "sw.js" }, // Копируем sw.js в dist
+      ],
+    }),
+  ],
+  devServer: {
+    static: path.join(__dirname, "dist"), // Обслуживаем только dist
+    compress: true,
+    port: 3000,
+  },
 };

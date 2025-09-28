@@ -14,7 +14,7 @@ export default class App {
   private ui: NewsFeedUI;
   private refreshButton: HTMLButtonElement;
 
-  private readonly serviceWorkerPath: string = "./sw.ts";
+  private readonly serviceWorkerPath: string = "/sw.js";
 
   constructor() {
     console.log("[App]: Инициализация приложения...");

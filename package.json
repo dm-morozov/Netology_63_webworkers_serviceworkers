@@ -23,10 +23,13 @@
     "@eslint/js": "^9.25.0",
     "@types/jest": "^30.0.0",
     "@types/puppeteer": "^7.0.4",
+    "@types/service_worker_api": "^0.0.9",
+    "@types/web": "^0.0.271",
     "@typescript-eslint/eslint-plugin": "^8.34.0",
     "@typescript-eslint/parser": "^8.34.0",
     "babel-loader": "^10.0.0",
     "concurrently": "^9.2.0",
+    "copy-webpack-plugin": "^13.0.1",
     "css-loader": "^7.1.2",
     "eslint": "^9.25.0",
     "eslint-plugin-import": "^2.31.0",
@@ -51,6 +54,7 @@
   },
   "dependencies": {
     "@faker-js/faker": "^10.0.0",
-    "core-js": "^3.41.0"
+    "core-js": "^3.41.0",
+    "service-worker": "^0.0.0"
   }
 }
